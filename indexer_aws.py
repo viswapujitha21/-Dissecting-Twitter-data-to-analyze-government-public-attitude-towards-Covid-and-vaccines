@@ -4,26 +4,19 @@ import requests
 import json
 import pickle
 
-IP = "localhost"
-path = "C:/Software/solr-8.10.1/bin/solr"
-
-# to start the solr
-# cd "C:\Software\solr-8.10.1\bin"
-# solr start
-core = 'CovidTweets'
-
-def delete_core(core):
-    print("core", core)
-    try:
-        print(os.system('{path} delete -c {core}'.format(path=path, core=core)))
-    except:
-        pass
+IP = "3.21.190.202"
+CORE_NAME = 'CovidTweets'
 
 
-def create_core(core):
+def delete_core(core=CORE_NAME):
+    print(os.system('sudo su - solr -c "/opt/solr/bin/solr delete -c {core}"'.format(core=core)))
+
+
+def create_core(core=CORE_NAME):
     print(os.system(
-        '{path} create -c {core} -n data_driven_schema_configs'.format(
-            path=path,core=core)))
+        'sudo su - solr -c "/opt/solr/bin/solr create -c {core} -n data_driven_schema_configs"'.format(
+            core=core)))
+
 
 
 class Indexer:
@@ -134,7 +127,7 @@ class Indexer:
                 },
             ]
         }
-        print(requests.post(self.solr_url + core + "/schema", json=data).json())
+        print(requests.post(self.solr_url + CORE_NAME + "/schema", json=data).json())
 
     
 if __name__ == "__main__":
@@ -144,11 +137,11 @@ if __name__ == "__main__":
         collection += tweetsdf.to_dict('records')
         print('poi {} tweets were added to the collection'.format(index+1))
 
-        repliesdf = pickle.load(open("./data/poi_{}_replies.pkl".format(index+1), "rb"))
-        collection += repliesdf.to_dict('records')
-        print('poi {} replies were added to the collection'.format(index+1))
+        # repliesdf = pickle.load(open("./data/poi_{}_replies.pkl".format(index+1), "rb"))
+        # collection += repliesdf.to_dict('records')
+        # print('poi {} replies were added to the collection'.format(index+1))
 
-    i = Indexer(core)
+    i = Indexer(core_name=CORE_NAME)
     i.do_initial_setup()
     i.add_fields()
     i.create_documents(collection)
