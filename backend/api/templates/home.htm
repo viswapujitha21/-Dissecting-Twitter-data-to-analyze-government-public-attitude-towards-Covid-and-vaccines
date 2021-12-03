@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <strong>Tweets</strong>
+    <br>
+    <form action="{% url 'search' %}" method="get">
+    <div class="container" style="padding:20px;">
+            <div class="col-md-12 well">
+                <h3 class="text-primary">Advance filters : </h3> 
+                <hr style="border-top:1px dotted #ccc;"/>
+        
+          {% block content %}
+
+  <p><b>POI Name : </b> 
+    
+         <select name="poi_name" class="form-control">
+          
+            <option value="RahulGandhi">Rahul Gandhi</option>
+            <option value="CDCgov" >CDC Gov</option>
+            <option value="JoeBiden">Joe Biden</option>
+            <option value="KamalaHarris">Kamala Harris</option>
+            <option value="BarackObama">Barack Obama</option>
+            <option value="tedcruz">Ted Cruz</option>
+            <option value="HHSGov">HHS Gov</option>
+            <option value="MoHFW_INDIA">Ministry of health</option>
+            <option value="narendramodi">Narendra Modi</option>
+            <option value="AmitShah">Amit Shah</option>
+            <option value="ArvindKejriwal">Arvind Kejriwal</option>
+            <option value="SSalud_mx">Salud Mexico</option>
+            <option value="lopezobrador_">Andrés Manuel</option>
+            <option value="m_ebrard">Marcelo Ebrard C.</option>
+            <option value="PRI_Nacional">PRI</option>
+            <option value="PRDMexico">PRD</option>
+            <option value="rodrigobocardi">Rodrigo Bocardi</option>
+            <input type="submit" value="Filter"/>
+            <input type="hidden" name="query" value={{ request.GET.query}} /> 
+            
+         </select>
+</p>  
+{% endblock %}
+            </div>
+            </div> 
+    </form>
+    <br>
+    {% for i in time_series_json_string %}
+        {% for k, v in i.items%}
+            {% ifequal k "tweet_text" %}
+                <tr>
+                    <td>{{v}}</td>
+                    <br>
+                    <br>
+                </tr>
+            {% endifequal %}
+        {% endfor %}
+    {% endfor %}
+</body>
+</html> 
