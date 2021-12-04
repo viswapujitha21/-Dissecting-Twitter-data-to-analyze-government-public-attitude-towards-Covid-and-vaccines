@@ -133,17 +133,17 @@ class Indexer:
 if __name__ == "__main__":
     collection = []
     for index, item in enumerate(range(15)):
-        tweetsdf = pickle.load(open("./data/poi_{}.pkl".format(index+1), "rb"))
-        collection += tweetsdf.to_dict('records')
-        print('poi {} tweets were added to the collection'.format(index+1))
+        # tweetsdf = pickle.load(open("./data/poi_{}.pkl".format(index+1), "rb"))
+        # collection += tweetsdf.to_dict('records')
+        # print('poi {} tweets were added to the collection'.format(index+1))
 
-        # repliesdf = pickle.load(open("./data/poi_{}_replies.pkl".format(index+1), "rb"))
-        # collection += repliesdf.to_dict('records')
-        # print('poi {} replies were added to the collection'.format(index+1))
+        repliesdf = pickle.load(open("./data/poi_{}_replies.pkl".format(index+1), "rb"))
+        collection += repliesdf.to_dict('records')
+        print('poi {} replies were added to the collection'.format(index+1))
 
     i = Indexer(core_name=CORE_NAME)
-    i.do_initial_setup()
-    i.add_fields()
+    # i.do_initial_setup()
+    # i.add_fields()
     i.create_documents(collection)
     
 
