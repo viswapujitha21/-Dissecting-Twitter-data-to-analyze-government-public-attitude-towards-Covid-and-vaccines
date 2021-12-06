@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from plotly.offline import plot
 import plotly.express as px
+import plotly.graph_objects as go
 
 from django.http.response import JsonResponse
 from django.shortcuts import render
@@ -60,10 +61,26 @@ def search(request):
     other_tweets = []
     trendingTopics=[]
     # result= json.dumps(data)
+    n_positive=0 
+    n_negative=0
+    n_neutral=0
+    n_positive_replies = 0
+    n_negative_replies = 0
+    n_neutral_replies = 0
+    n_India_cnt=0
+    n_Russia_cnt=0
+    n_USA_cnt=0
+
     for tweet in tweets:
         if(len(final_tweets) > 20):
             break
         tweet['sentiment'] = analyze_sentiment(tweet['tweet_text'])
+        if tweet['sentiment'] == 'positive' :
+            n_positive+=1
+        elif tweet['sentiment'] == 'negative' :
+            n_negative+=1    
+        else :
+            n_neutral+=1
 
         # sentiment of the tweet
         positive_replies = 0
@@ -92,6 +109,11 @@ def search(request):
         tweet['positive_replies'] = positive_replies
         tweet['negative_replies'] = negative_replies
         tweet['neutral_replies'] = neutral_replies
+
+        n_positive_replies +=positive_replies
+        n_negative_replies +=negative_replies
+        n_neutral_replies +=neutral_replies
+
         # final_tweets.append(tweet)
         if(len(replies) > 0):
             final_tweets.append(tweet)
@@ -103,6 +125,46 @@ def search(request):
         final_tweets.append(other_tweets[i])
         i+=1
 
+    #General tweet graph
+    df1 = pd.DataFrame(dict(Sentiment=['positive','negative','neutral']))
+    df2 = pd.DataFrame(dict(Count=[n_positive,n_negative,n_neutral]))
+    fig = px.bar(df1, x=df1.Sentiment, y=df2.Count, color=df1.Sentiment)
+    fig.update_layout(
+    autosize=False,
+    width=900,
+    height=400,
+    yaxis=dict(
+         title_text="Tweet Count",
+    #     ticktext=["Very long label", "long label", "3", "label"],
+    #     tickvals=[1, 2, 3, 4],
+    #     tickmode="array",
+    #     titlefont=dict(size=30),
+    )
+    )
+    fig.update_yaxes(automargin=True)
+    plt_div = plot(fig, output_type='div')
+
+    
+
+    #Replies Graph
+    df3 = pd.DataFrame(dict(Replies=['positive','negative','neutral']))
+    df4 = pd.DataFrame(dict(Count=[n_positive_replies,n_negative_replies,n_neutral_replies]))
+    fig1 = px.bar(df3, x=df3.Replies, y=df4.Count, color=df3.Replies)
+    fig1.update_layout(
+    autosize=False,
+    width=900,
+    height=400,
+    yaxis=dict(
+         title_text="Reply Count",
+    #     ticktext=["Very long label", "long label", "3", "label"],
+    #     tickvals=[1, 2, 3, 4],
+    #     tickmode="array",
+    #     titlefont=dict(size=30),
+    )
+    )
+    fig1.update_yaxes(automargin=True)
+    fig1.update_xaxes(title_text="Reply Responses")
+    plt_div1 = plot(fig1, output_type='div')
 
     # return Response(final_tweets);
     # json_string = json.dumps(tweets)
@@ -111,7 +173,7 @@ def search(request):
     #        for key,val in lis.items():
     context={}
     # return render(request, "home.htm", context)
-    return render(request, "home.htm", {'time_series_json_string': jsn_list})
+    return render(request, "home.htm", {'time_series_json_string': jsn_list,'plot_div':plt_div,'plot_div_replies':plt_div1})
            
 
     
@@ -163,7 +225,66 @@ def overview(request):
     )
     fig.update_yaxes(automargin=True)
     plt_div = plot(fig, output_type='div')
-    return render(request, "overview.htm", {'plot_div':plt_div})
+        #Country Graph
+    labels = ['India','Mexico','USA']
+    values = [14236,11059,10533]
+    ndata = 100
+    fig2 = {
+        'data': [{'labels': labels,
+            'values': values,
+            'type': 'pie',
+            'textposition':"none",
+            'textinfo':"percent",
+            'textfont':{'size':12},
+            'showlegend':True}],
+        'layout': {'title': 'Total:'+str(ndata),
+            'showlegend':True,
+            'height':600,
+            'width':600,
+            'autosize':False,
+            'margin':{'t':70,'l':95,'r':10,'b':20},
+            'separators':'.,'}
+    }
+    plt_div2 = plot(fig2, output_type='div')
+
+    #Language Graph
+    lang_labels = ['en','und','es','fr','tr','pt','ca','sv','tl','cy','da','et','or','hi','gu','ta','mr','bn',
+    'pa','ne','ml','iw','te','kn','de','in','it','nl','ro','is','ru','sl','lt','ja','hu','zh','vi','ht','fa','ar','my','no','pl','eu','lv','cs','fi','ur']
+    lang_values = [14328,3639,10236,39,9,136,30,8,141,7,6,81,25,6044,110,47,53,121,64,48,27,3,12,8,18,352,26,8,6,1,1,6,15,5,7,16,10,72,2,2,1,4,7,9,14,11,11,2]
+    ndata = 100
+    fig3 = {
+        'data': [{'labels': lang_labels,
+            'values': lang_values,
+            'type': 'pie',
+            'textposition':"none",
+            'textinfo':"percent",
+            'textfont':{'size':12},
+            'showlegend':True}],
+        'layout': {'title': 'Total:'+str(ndata),
+            'showlegend':True,
+            'height':600,
+            'width':600,
+            'autosize':False,
+            'margin':{'t':70,'l':95,'r':10,'b':20},
+            'separators':'.,'}
+    }
+    plt_div3 = plot(fig3, output_type='div')
+
+    # POI's Covid and non-covid tweets
+
+    poi=['CDCgov', 'JoeBiden', 'KamalaHarris','BarackObama','tedcruz','HHSGov','MoHFW_INDIA','narendramodi','RahulGandhi',
+    'AmitShah','ArvindKejriwal','SSalud_mx','lopezobrador','m_ebrard','PRI_Nacional','PRDMexico','rodrigobocardi']
+
+    fig4 = go.Figure(data=[
+        go.Bar(name='Covid Tweet Count', x=poi, y=[747, 249, 357, 248, 0, 106, 246, 286, 87, 297, 279, 86, 93, 28, 91, 0]),
+        go.Bar(name='Non-Covid Tweet Count', x=poi, y=[321, 801, 699, 876, 940, 0, 434, 872, 887, 926, 772, 824, 1040, 914, 1033, 1025, 0])
+    ])
+    # Change the bar mode
+    fig4.update_layout(barmode='group')
+    plt_div4 = plot(fig4, output_type='div')
+    #fig4.show()
+    
+    return render(request, "overview.htm", {'plot_div':plt_div,'plot_div_country':plt_div2,'plot_div_lang':plt_div3,'plot_div_tweets':plt_div4})
     
     
             

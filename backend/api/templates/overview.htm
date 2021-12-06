@@ -16,6 +16,30 @@
         {{ plot_div }}
         {% endautoescape %}
     </div>
+    <tbody>
+        <tr>
+            <td>
+                <h2 style="font-size:2vw; padding-left:400px">Trending topics</h2>
+                <div style="text-align:center">
+                    {% autoescape off %}
+                    {{ plot_div_country }}
+                    {% endautoescape %}
     
+                    {% autoescape off %}
+                    {{ plot_div_lang }}
+                    {% endautoescape %}
+                </div>    
+            </td>
+            <td>
+                <h2 style="font-size:2vw; padding-left:400px">Trending topics</h2>
+                <div style="text-align:right">
+                    
+                    {% autoescape off %}
+                    {{ plot_div_tweets}}
+                    {% endautoescape %}
+                </div>    
+            </td>
+        </tr>
+    </tbody>
 </body>
 </html>

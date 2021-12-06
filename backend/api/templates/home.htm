@@ -8,7 +8,7 @@
     <title>Document</title>
     <link href="{% static 'css/navbar.css' %}" rel="stylesheet" />
     <div class="topnav">
-        <a class="active" href="#home">Home</a>
+        <a class="active" href="./home">Home</a>
         <a href="./overview">Overview</a>
       </div>
 </head>
@@ -60,7 +60,19 @@
         {% endfor %}
     {% endfor %}
 </div>
+    <div class="rightdiv">
+        <h1 style="font-size:2vw">Sentiment Analysis</h1>
 
+        {% autoescape off %}
+        {{ plot_div }}
+        {% endautoescape %}
+
+        <h1 style="font-size:2vw">Sentiment Analysis Of Replies</h1>
+
+        {% autoescape off %}
+        {{ plot_div_replies }}
+        {% endautoescape %}  
+</div>
     
 </body>
 </html> 
