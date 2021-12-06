@@ -53,6 +53,7 @@
                 <p>
                 <select name="country" class="form-control">
           
+                    <option value="">Select a country</option>
                     <option value="INDIA">INDIA</option>
                     <option value="MEXICO" >MEXICO</option>
                     <option value="USA">USA</option>
@@ -64,7 +65,8 @@
                 <p>
                     <select name="language" class="form-control">
           
-                        <option value="hi">hindi</option>
+                        <option value="">Select a language</option>
+                        <option value="hi">Hindi</option>
                         <option value="es" >Spanish</option>
                         <option value="en">English</option>
                         <input type="submit" value="Filter"/>
@@ -90,14 +92,32 @@
         <tr style=" border: 1px solid black;width: 100px; overflow: hidden">
             {% if k == "poi_name" %}
                 <div style="font-size: large;">
-                    <span style="color: darkblue;">@</span><strong style="color: blue;">{{v}}</strong>
+                    <span style="color: darkblue;">@</span><strong style="color: #1DA1F2;">{{v}}</strong>
                 </div> 
             {% endif %}
             {% if k == "tweet_text" %}
                 {{v}}
             {% endif %}
-            {% if k == "tweet_text" %}
-                {{v}}
+            {% if k == "sentiment" and v == "negative" %}
+                Public Response: <strong style="color: red">{{v}}</strong>
+            {% endif %} 
+            {% if k == "sentiment" and v == "positive" %}
+                Public Response: <strong style="color: green">{{v}}</strong>
+            {% endif %} 
+            {% if k == "sentiment" and v == "neutral" %}
+                Public Response: <strong style="color: orange">{{v}}</strong>
+            {% endif %} 
+            {% if k == "replies" %}
+                {% if v|length > 1 %}
+                    <div><strong style="color: black;">Top Replies:</strong></div>
+                {% endif %}
+                {% for reply in v %}
+                    {% for key, val in reply.items%}
+                        {% if key == "tweet_text" %}
+                            <div style="padding-left: 20px;">{{val}}</div>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
             {% endif %}
         </tr>
         {% endfor %}

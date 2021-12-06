@@ -38,7 +38,7 @@ def search(request):
     or_seperator = "%20OR%20"
     and_seperator = "%20AND%20"
     url_prefix = "http://3.21.190.202:8983/solr/{core}/select?q=".format(core = core)
-    url_suffix = "&wt=json&indent=true&rows=200"
+    url_suffix = "&wt=json&indent=true&rows=50"
     query_string = "-replied_to_tweet_id:%5B*%20TO%20*%5D%26"+ and_seperator +"tweet_text:" + q
     print('querystring-----  ',query_string)
     if poi_name:
@@ -234,7 +234,7 @@ def overview(request):
         'data': [{'labels': labels,
             'values': values,
             'type': 'pie',
-            'textposition':"none",
+            'textposition':"inside",
             'textinfo':"percent",
             'textfont':{'size':12},
             'showlegend':True}],
@@ -244,8 +244,10 @@ def overview(request):
             'width':600,
             'autosize':False,
             'margin':{'t':70,'l':95,'r':10,'b':20},
-            'separators':'.,'}
+            'separators':'.,',
+            }
     }
+    # fig2.update_traces(textposition='inside', textinfo='percent')
     plt_div2 = plot(fig2, output_type='div')
 
     #Language Graph
@@ -257,7 +259,7 @@ def overview(request):
         'data': [{'labels': lang_labels,
             'values': lang_values,
             'type': 'pie',
-            'textposition':"none",
+            'textposition':"inside",
             'textinfo':"percent",
             'textfont':{'size':12},
             'showlegend':True}],
