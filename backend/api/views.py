@@ -131,7 +131,7 @@ def search(request):
     fig = px.bar(df1, x=df1.Sentiment, y=df2.Count, color=df1.Sentiment)
     fig.update_layout(
     autosize=False,
-    width=600,
+    width=800,
     height=400,
     yaxis=dict(
          title_text="Tweet Count",
@@ -152,7 +152,7 @@ def search(request):
     fig1 = px.bar(df3, x=df3.Replies, y=df4.Count, color=df3.Replies)
     fig1.update_layout(
     autosize=False,
-    width=600,
+    width=800,
     height=400,
     yaxis=dict(
          title_text="Reply Count",
