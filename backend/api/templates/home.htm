@@ -43,6 +43,22 @@
             <option value="rodrigobocardi">Rodrigo Bocardi</option>
             <input type="submit" value="Filter"/>
             <input type="hidden" name="query" value={{ request.GET.query}} /> 
+
+            <select name="country" class="form-control">
+          
+                <option value="INDIA">INDIA</option>
+                <option value="MEXICO" >MEXICO</option>
+                <option value="USA">USA</option>
+                <input type="submit" value="Filter"/>
+               
+
+            <select name="language" class="form-control">
+          
+                    <option value="hi">hindi</option>
+                    <option value="es" >Spanish</option>
+                    <option value="en">English</option>
+                    <input type="submit" value="Filter"/>
+                    
             
          </select>
 </p>  
@@ -89,7 +105,7 @@
         </div>
     </div>
     <div class="col-md-6">
-        <div class="rightside" style="float: right; margin: 0px 15px 15px 0px;">
+        <div class="rightside" style="float: right; margin: 10px 15px 15px 0px;">
             <h1 style="font-size:2vw">Sentiment Analysis</h1>
 
                 {% autoescape off %}
