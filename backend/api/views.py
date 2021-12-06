@@ -131,8 +131,8 @@ def search(request):
     fig = px.bar(df1, x=df1.Sentiment, y=df2.Count, color=df1.Sentiment)
     fig.update_layout(
     autosize=False,
-    width=800,
-    height=400,
+    width=850,
+    height=500,
     yaxis=dict(
          title_text="Tweet Count",
     #     ticktext=["Very long label", "long label", "3", "label"],
@@ -152,8 +152,8 @@ def search(request):
     fig1 = px.bar(df3, x=df3.Replies, y=df4.Count, color=df3.Replies)
     fig1.update_layout(
     autosize=False,
-    width=800,
-    height=400,
+    width=850,
+    height=500,
     yaxis=dict(
          title_text="Reply Count",
     #     ticktext=["Very long label", "long label", "3", "label"],
@@ -214,7 +214,7 @@ def overview(request):
     fig.update_layout(
     title = 'Trending topics',
     autosize=False,
-    width=1100,
+    width=1700,
     height=400,
     yaxis=dict(
          title_text="Tweet count",
@@ -283,7 +283,7 @@ def overview(request):
         go.Bar(name='Non-Covid Tweet Count', x=poi, y=[321, 801, 699, 876, 940, 434, 872, 887, 926, 772, 824, 1040, 914, 1033, 1025])
     ])
     # Change the bar mode
-    fig4.update_layout(barmode='group')
+    fig4.update_layout(barmode='group',title = 'Covid and Non-Covid Tweet distribution of POI')
     plt_div4 = plot(fig4, output_type='div')
     #fig4.show()
     
