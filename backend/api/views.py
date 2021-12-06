@@ -38,7 +38,7 @@ def search(request):
     or_seperator = "%20OR%20"
     and_seperator = "%20AND%20"
     url_prefix = "http://3.21.190.202:8983/solr/{core}/select?q=".format(core = core)
-    url_suffix = "&wt=json&indent=true&rows=50"
+    url_suffix = "&wt=json&indent=true&rows=20"
     query_string = "-replied_to_tweet_id:%5B*%20TO%20*%5D%26"+ and_seperator +"tweet_text:" + q
     print('querystring-----  ',query_string)
     if poi_name:
@@ -131,7 +131,7 @@ def search(request):
     fig = px.bar(df1, x=df1.Sentiment, y=df2.Count, color=df1.Sentiment)
     fig.update_layout(
     autosize=False,
-    width=600,
+    width=800,
     height=400,
     yaxis=dict(
          title_text="Tweet Count",
@@ -152,7 +152,7 @@ def search(request):
     fig1 = px.bar(df3, x=df3.Replies, y=df4.Count, color=df3.Replies)
     fig1.update_layout(
     autosize=False,
-    width=600,
+    width=800,
     height=400,
     yaxis=dict(
          title_text="Reply Count",
