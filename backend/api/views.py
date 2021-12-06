@@ -25,6 +25,8 @@ def search(request):
     # poi = request.GET['poi_name']
     print(request.GET.get('poi_name'))
     poi_name= request.GET.get('poi_name')
+    country= request.GET.get('country')
+    language= request.GET.get('language')
     core = 'CovidTweets'
     query = re.sub('\W+', ' ', query)
     query = query.strip()
@@ -39,19 +41,27 @@ def search(request):
     query_string = "-replied_to_tweet_id:%5B*%20TO%20*%5D%26"+ and_seperator +"tweet_text:" + q
     print('querystring-----  ',query_string)
     if poi_name:
-        query_string=query_string+'and%20poi_name%3A'+poi_name
+        query_string=query_string+ and_seperator +'poi_name:'+poi_name
         print('updated : ==----',query_string)
+
+    if country:
+        query_string=query_string + and_seperator +'country:'+country
+
+    if language:
+        query_string=query_string+ and_seperator+'tweet_lang:'+language
     
+    print(query_string)    
     inurl = url_prefix + query_string + url_suffix
     print(inurl)
     data = urllib.request.urlopen(inurl)
     print(data)
     tweets = json.load(data)['response']['docs']
     final_tweets = []
+    other_tweets = []
     trendingTopics=[]
     # result= json.dumps(data)
-    for tweet in tweets:        
-        if(len(final_tweets) >20):
+    for tweet in tweets:
+        if(len(final_tweets) > 20):
             break
         tweet['sentiment'] = analyze_sentiment(tweet['tweet_text'])
 
@@ -66,7 +76,11 @@ def search(request):
         inurl = url_prefix + reply_query_string + url_suffix
         data = urllib.request.urlopen(inurl)
         replies = json.load(data)['response']['docs']
+        count = 0
         for reply in replies:
+            count+=1
+            if(count >20):
+                break
             if(analyze_sentiment(reply['tweet_text']) == 'positive'):
                 positive_replies+=1
             if(analyze_sentiment(reply['tweet_text']) == 'negative'):
@@ -81,11 +95,18 @@ def search(request):
         # final_tweets.append(tweet)
         if(len(replies) > 0):
             final_tweets.append(tweet)
+        else:
+            other_tweets.append(tweet)
+
+    i = 0
+    while(len(final_tweets) < 20 and i < len(other_tweets)):
+        final_tweets.append(other_tweets[i])
+        i+=1
 
 
     # return Response(final_tweets);
     # json_string = json.dumps(tweets)
-    jsn_list = json.loads(json.dumps(tweets)) 
+    jsn_list = json.loads(json.dumps(final_tweets)) 
     # for lis in jsn_list:
     #        for key,val in lis.items():
     context={}
