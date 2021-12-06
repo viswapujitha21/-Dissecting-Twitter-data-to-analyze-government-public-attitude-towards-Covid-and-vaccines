@@ -51,6 +51,13 @@ main {
 }
 
 
+.leftside,.rightside{
+height: 100vph;
+width: 100%;
+}
+
+
+
 .center {
   text-align: center;
 }
