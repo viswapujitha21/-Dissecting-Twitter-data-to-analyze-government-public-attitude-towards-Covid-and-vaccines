@@ -4,6 +4,10 @@ import re
 import urllib.request 
 from urllib.parse import quote
 from textblob import TextBlob 
+import matplotlib.pyplot as plt
+import pandas as pd
+from plotly.offline import plot
+import plotly.express as px
 
 from django.http.response import JsonResponse
 from django.shortcuts import render
@@ -44,8 +48,9 @@ def search(request):
     print(data)
     tweets = json.load(data)['response']['docs']
     final_tweets = []
+    trendingTopics=[]
     # result= json.dumps(data)
-    for tweet in tweets:
+    for tweet in tweets:        
         if(len(final_tweets) >20):
             break
         tweet['sentiment'] = analyze_sentiment(tweet['tweet_text'])
@@ -117,6 +122,33 @@ def home_page(request):
     
     # return render(request, 'index.htm', {})
     
+def overview(request):
+    df1 = pd.DataFrame(dict(Topics=['COVID19', 'Unite2FightCorona', 'LargestVaccineDrive', 'DoYourJob', 'ActOnClimate',
+                                       'MannKiBaat','Verdict','Tokyo2020','BidenBorderCrisis','Paralympics','HealthForAll',
+                                       'COVIDCharcha','WearAMask','DeltaVariant','Singhuborder','WeCanDoThis','Cheer4India']))
+    df2 = pd.DataFrame(dict(Count=[853,174,133,83,53,49,45,45,44,32,28,28,23,21,20,19,18]))
+    fig = px.bar(df1, x=df1.Topics, y=df2.Count, color=df1.Topics)
+    fig.update_layout(
+    autosize=False,
+    width=900,
+    height=400,
+    yaxis=dict(
+         title_text="Tweet count",
+    #     ticktext=["Very long label", "long label", "3", "label"],
+    #     tickvals=[1, 2, 3, 4],
+    #     tickmode="array",
+    #     titlefont=dict(size=30),
+    )
+    )
+    fig.update_yaxes(automargin=True)
+    plt_div = plot(fig, output_type='div')
+    return render(request, "overview.htm", {'plot_div':plt_div})
+    
+    
+            
+    # return render(request, 'overview.htm',{})
+     
+        
 
 
 

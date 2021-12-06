@@ -122,8 +122,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 # this is the static files folder name which you created in django project root folder. This is different from above STATIC_URL. 
-STATICFILES_DIRS = [
-    os.path.join('C:/Users/mital/coscraper/backend/api/migrations/', 'statics'),
+STATICFILES_DIRS = ["C:/Users/mital/coscraper/backend/api/static",
 ]
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
