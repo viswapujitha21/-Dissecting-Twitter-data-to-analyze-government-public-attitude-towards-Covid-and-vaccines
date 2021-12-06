@@ -212,8 +212,9 @@ def overview(request):
     df2 = pd.DataFrame(dict(Count=[853,174,133,83,53,49,45,45,44,32,28,28,23,21,20,19,18]))
     fig = px.bar(df1, x=df1.Topics, y=df2.Count, color=df1.Topics)
     fig.update_layout(
+    title = 'Trending topics',
     autosize=False,
-    width=900,
+    width=1100,
     height=400,
     yaxis=dict(
          title_text="Tweet count",
