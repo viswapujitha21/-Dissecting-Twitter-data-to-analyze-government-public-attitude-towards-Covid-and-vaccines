@@ -18,51 +18,67 @@
     <form action="{% url 'search' %}" method="get">
     <div class="container">
             <div class="col-md-12 well">
-                <h4>Advance filters : </h4>         
-
-         <select name="poi_name" class="form-control">
-            
-            <option value="">Select a POI</option>
-            <option value="RahulGandhi">Rahul Gandhi</option>
-            <option value="CDCgov" >CDC Gov</option>
-            <option value="JoeBiden">Joe Biden</option>
-            <option value="KamalaHarris">Kamala Harris</option>
-            <option value="BarackObama">Barack Obama</option>
-            <option value="tedcruz">Ted Cruz</option>
-            <option value="HHSGov">HHS Gov</option>
-            <option value="MoHFW_INDIA">Ministry of health</option>
-            <option value="narendramodi">Narendra Modi</option>
-            <option value="AmitShah">Amit Shah</option>
-            <option value="ArvindKejriwal">Arvind Kejriwal</option>
-            <option value="SSalud_mx">Salud Mexico</option>
-            <option value="lopezobrador_">Andrés Manuel</option>
-            <option value="m_ebrard">Marcelo Ebrard C.</option>
-            <option value="PRI_Nacional">PRI</option>
-            <option value="PRDMexico">PRD</option>
-            <option value="rodrigobocardi">Rodrigo Bocardi</option>
-            <input type="submit" value="Filter"/>
-            <input type="hidden" name="query" value={{ request.GET.query}} /> 
-
-            <select name="country" class="form-control">
+                <h4>Advance filters : </h4>   
+    <table>          
+    <tbody>
+        <tr>
+            <td>
+                <p>
+                    <select name="poi_name" class="form-control">
+                       
+                       <option value="">Select a POI</option>
+                       <option value="RahulGandhi">Rahul Gandhi</option>
+                       <option value="CDCgov" >CDC Gov</option>
+                       <option value="JoeBiden">Joe Biden</option>
+                       <option value="KamalaHarris">Kamala Harris</option>
+                       <option value="BarackObama">Barack Obama</option>
+                       <option value="tedcruz">Ted Cruz</option>
+                       <option value="HHSGov">HHS Gov</option>
+                       <option value="MoHFW_INDIA">Ministry of health</option>
+                       <option value="narendramodi">Narendra Modi</option>
+                       <option value="AmitShah">Amit Shah</option>
+                       <option value="ArvindKejriwal">Arvind Kejriwal</option>
+                       <option value="SSalud_mx">Salud Mexico</option>
+                       <option value="lopezobrador_">Andrés Manuel</option>
+                       <option value="m_ebrard">Marcelo Ebrard C.</option>
+                       <option value="PRI_Nacional">PRI</option>
+                       <option value="PRDMexico">PRD</option>
+                       <option value="rodrigobocardi">Rodrigo Bocardi</option>
+                       <input type="submit" value="Filter"/>
+                       <input type="hidden" name="query" value={{ request.GET.query}} /> 
+                    </select>   
+                    </p>       
+            </td>
+            <td>
+                <p>
+                <select name="country" class="form-control">
           
-                <option value="">Select a country</option>
-                <option value="INDIA">INDIA</option>
-                <option value="MEXICO" >MEXICO</option>
-                <option value="USA">USA</option>
-                <input type="submit" value="Filter"/>
-               
+                    <option value="">Select a country</option>
+                    <option value="INDIA">INDIA</option>
+                    <option value="MEXICO" >MEXICO</option>
+                    <option value="USA">USA</option>
+                    <input type="submit" value="Filter"/>
+                </select>    
+                </p>    
+            </td>
+            <td>
+                <p>
+                    <select name="language" class="form-control">
+          
+                        <option value="">Select a language</option>
+                        <option value="hi">Hindi</option>
+                        <option value="es" >Spanish</option>
+                        <option value="en">English</option>
+                        <input type="submit" value="Filter"/>
+                        
+                
+                    </select>
+                </p>
 
-            <select name="language" class="form-control">
-
-                <option value="">Select a language</option>
-                <option value="hi">Hindi</option>
-                <option value="es" >Spanish</option>
-                <option value="en">English</option>
-                <input type="submit" value="Filter"/>
-                    
-            
-         </select>
-</p>  
+            </td>
+        </tr>
+    </tbody>    
+    </table>
             </div>
             </div> 
     </form>
