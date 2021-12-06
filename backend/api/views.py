@@ -38,7 +38,7 @@ def search(request):
     or_seperator = "%20OR%20"
     and_seperator = "%20AND%20"
     url_prefix = "http://3.21.190.202:8983/solr/{core}/select?q=".format(core = core)
-    url_suffix = "&wt=json&indent=true&rows=200"
+    url_suffix = "&wt=json&indent=true&rows=50"
     query_string = "-replied_to_tweet_id:%5B*%20TO%20*%5D%26"+ and_seperator +"tweet_text:" + q
     print('querystring-----  ',query_string)
     if poi_name:
