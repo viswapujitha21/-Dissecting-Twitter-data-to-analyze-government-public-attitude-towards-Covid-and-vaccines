@@ -5,18 +5,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,800" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="{% static 'css/main.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/navbar.css' %}" rel="stylesheet" />
+    <div class="topnav">
+        <a href="./home">Home</a>
+        <a class ="active" href="./overview">Overview</a>
+      </div>
     <title>Document</title>
 </head>
 <body style="background-color:aliceblue">
+    <div class="center">
     
-    <h2 style="font-size:2vw; padding-left:400px">Trending topics</h2>
     <div style="text-align:center">
         {% autoescape off %}
         {{ plot_div }}
         {% endautoescape %}
     </div>
+    </div>
+    <br>
+    <br>
     <tbody>
         <tr>
             <td>
