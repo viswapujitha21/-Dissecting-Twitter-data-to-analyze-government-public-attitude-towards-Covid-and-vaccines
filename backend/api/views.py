@@ -237,7 +237,7 @@ def overview(request):
             'textinfo':"percent",
             'textfont':{'size':12},
             'showlegend':True}],
-        'layout': {'title': 'Total:'+str(ndata),
+        'layout': {'title': 'Country wise distribution of Tweets',
             'showlegend':True,
             'height':600,
             'width':600,
@@ -260,7 +260,7 @@ def overview(request):
             'textinfo':"percent",
             'textfont':{'size':12},
             'showlegend':True}],
-        'layout': {'title': 'Total:'+str(ndata),
+        'layout': {'title': 'Language wise distribution of Tweets',
             'showlegend':True,
             'height':600,
             'width':600,
@@ -273,11 +273,11 @@ def overview(request):
     # POI's Covid and non-covid tweets
 
     poi=['CDCgov', 'JoeBiden', 'KamalaHarris','BarackObama','tedcruz','HHSGov','MoHFW_INDIA','narendramodi','RahulGandhi',
-    'AmitShah','ArvindKejriwal','SSalud_mx','lopezobrador','m_ebrard','PRI_Nacional','PRDMexico','rodrigobocardi']
+    'AmitShah','ArvindKejriwal','SSalud_mx','lopezobrador','m_ebrard','PRI_Nacional','PRDMexico']
 
     fig4 = go.Figure(data=[
         go.Bar(name='Covid Tweet Count', x=poi, y=[747, 249, 357, 248, 0, 106, 246, 286, 87, 297, 279, 86, 93, 28, 91, 0]),
-        go.Bar(name='Non-Covid Tweet Count', x=poi, y=[321, 801, 699, 876, 940, 0, 434, 872, 887, 926, 772, 824, 1040, 914, 1033, 1025, 0])
+        go.Bar(name='Non-Covid Tweet Count', x=poi, y=[321, 801, 699, 876, 940, 0, 434, 872, 887, 926, 772, 824, 1040, 914, 1033, 1025])
     ])
     # Change the bar mode
     fig4.update_layout(barmode='group')
