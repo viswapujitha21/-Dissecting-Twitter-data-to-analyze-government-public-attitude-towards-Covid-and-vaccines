@@ -20,7 +20,8 @@
   <p><b>POI Name : </b> 
 
          <select name="poi_name" class="form-control">
-          
+            
+            <option value="">Select a POI</option>
             <option value="RahulGandhi">Rahul Gandhi</option>
             <option value="CDCgov" >CDC Gov</option>
             <option value="JoeBiden">Joe Biden</option>
@@ -49,15 +50,22 @@
     <br>
     
     <div style="word-wrap: break-word; width:600px;text-align: justify;text-justify: inter-word;">
-            {% for i in time_series_json_string %}
+    {% for i in time_series_json_string %}
         {% for k, v in i.items%}
-            {% ifequal k "tweet_text" %}
-                    <tr style=" border: 1px solid black;width: 100px; overflow: hidden">{{v}}</tr>
-                    <br>
-                    <hr style="border-top:1px dotted #ccc;"/>
-                    <br>
-            {% endifequal %}
+        <tr style=" border: 1px solid black;width: 100px; overflow: hidden">
+            {% if k == "poi_name" %}
+                <div style="font-size: large;">
+                    <p style="color: darkblue;">Tweet by:</p><strong style="color: blue;">{{v}}</strong>
+                </div> 
+            {% endif %}
+            {% if k == "tweet_text" %}
+                {{v}}
+            {% endif %}
+        </tr>
         {% endfor %}
+        <br>
+        <hr style="border-top:1px dotted #ccc;"/>
+        <br>
     {% endfor %}
 </div>
 
