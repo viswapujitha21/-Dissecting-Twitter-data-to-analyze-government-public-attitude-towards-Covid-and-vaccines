@@ -16,10 +16,9 @@
 </head>
 <body style="background-color:aliceblue">
     <form action="{% url 'search' %}" method="get">
-    <div class="container">
+    
 
-            <div class="col-md-6"style="padding-left: 0px;"></div>
-                <h4>Advance filters : </h4>   
+                <h4 style="text-align:left;">Advance filters : </h4>   
     <table>          
     <tbody>
         <tr>
@@ -74,14 +73,16 @@
 
             </td>
             <td>
+                
                 <input type="submit" value="Go"/>
                 <input type="hidden" name="query" value={{ request.GET.query}} /> 
             </td>
         </tr>
+    
     </tbody>    
     </table>
             </div>
-            </div> 
+            
     </form>
     <br>
 
