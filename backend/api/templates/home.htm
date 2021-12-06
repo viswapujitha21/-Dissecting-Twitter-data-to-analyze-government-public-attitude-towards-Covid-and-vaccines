@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet" />
     <link href="{% static 'css/navbar.css' %}" rel="stylesheet" />
     <div class="topnav">
         <a class="active" href="./home">Home</a>
@@ -47,32 +49,37 @@
             </div> 
     </form>
     <br>
-    
-    <div style="word-wrap: break-word; width:600px;text-align: justify;text-justify: inter-word;">
+
+<div class="row no-gutters">
+    <div class="col-md-6"style="padding-left: 10px;">
+       <div class="leftside" style="word-wrap: break-word; width:800px;text-align: justify;text-justify: inter-word;">
             {% for i in time_series_json_string %}
-        {% for k, v in i.items%}
-            {% ifequal k "tweet_text" %}
-                    <tr style=" border: 1px solid black;width: 100px; overflow: hidden">{{v}}</tr>
-                    <br>
-                    <hr style="border-top:1px dotted #ccc;"/>
-                    <br>
-            {% endifequal %}
+            {% for k, v in i.items%}
+                {% ifequal k "tweet_text" %}
+                        <tr style=" border: 1px solid black;width: 100px; overflow: hidden">{{v}}</tr>
+                        <br>
+                        <hr style="border-top:1px dotted #ccc;"/>
+                        <br>
+                {% endifequal %}
+            {% endfor %}
         {% endfor %}
-    {% endfor %}
-</div>
-    <div class="rightdiv">
-        <h1 style="font-size:2vw">Sentiment Analysis</h1>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="rightside" style="float: right; margin: 0px 15px 15px 0px;">
+            <h1 style="font-size:2vw">Sentiment Analysis</h1>
 
-        {% autoescape off %}
-        {{ plot_div }}
-        {% endautoescape %}
+                {% autoescape off %}
+                {{ plot_div }}
+                {% endautoescape %}
 
-        <h1 style="font-size:2vw">Sentiment Analysis Of Replies</h1>
+                <h1 style="font-size:2vw">Sentiment Analysis Of Replies</h1>
 
-        {% autoescape off %}
-        {{ plot_div_replies }}
-        {% endautoescape %}  
-</div>
-    
+                {% autoescape off %}
+                {{ plot_div_replies }}
+                {% endautoescape %}  
+        </div>
+    </div>    
+</div>    
 </body>
 </html> 
