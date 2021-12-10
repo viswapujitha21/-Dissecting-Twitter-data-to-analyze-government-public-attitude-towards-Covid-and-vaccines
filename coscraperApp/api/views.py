@@ -214,7 +214,7 @@ def overview(request):
     fig.update_layout(
     title = 'Trending topics',
     autosize=False,
-    width=1700,
+    width=1560,
     height=400,
     yaxis=dict(
          title_text="Tweet count",
@@ -238,7 +238,7 @@ def overview(request):
             'textinfo':"percent",
             'textfont':{'size':12},
             'showlegend':True}],
-        'layout': {'title': 'Country wise distribution of Tweets',
+        'layout': {'title': '',
             'showlegend':True,
             'height':600,
             'width':600,
@@ -263,7 +263,7 @@ def overview(request):
             'textinfo':"percent",
             'textfont':{'size':12},
             'showlegend':True}],
-        'layout': {'title': 'Language wise distribution of Tweets',
+        'layout': {'title': '',
             'showlegend':True,
             'height':600,
             'width':600,
@@ -287,7 +287,32 @@ def overview(request):
     plt_div4 = plot(fig4, output_type='div')
     #fig4.show()
     
-    return render(request, "overview.htm", {'plot_div':plt_div,'plot_div_country':plt_div2,'plot_div_lang':plt_div3,'plot_div_tweets':plt_div4})
+    
+    #Covid and Vaccine Tweet Graph
+    overall_labels = ['Covid Tweet Count','Vaccine Tweet Count']
+    overall_values = [6659,6067]
+    ngdata = 100
+    fig5 = {
+        'data': [{'labels': overall_labels,
+            'values': overall_values,
+            'type': 'pie',
+            'textposition':"inside",
+            'textinfo':"percent",
+            'textfont':{'size':12},
+            'showlegend':True}],
+        'layout': {'title': '',
+            'showlegend':True,
+            'height':600,
+            'width':600,
+            'autosize':False,
+            'margin':{'t':70,'l':95,'r':10,'b':20},
+            'separators':'.,'}
+    }
+    plt_div5 = plot(fig5, output_type='div')
+    
+    
+    
+    return render(request, "overview.htm", {'plot_div':plt_div,'plot_div_country':plt_div2,'plot_div_lang':plt_div3,'plt_div_overall':plt_div5,'plot_div_tweets':plt_div4})
     
     
             
