@@ -17,9 +17,9 @@
 </head>
 <body style="background-color:aliceblue">
     <div class="center">
-    <br>
-    <br>
-    <h4>Trending Topics</h4>
+        <br>
+        <br>
+        <h4>Trending Topics</h4>
     <div style="text-align:center">
         {% autoescape off %}
         {{ plot_div }}
@@ -34,15 +34,30 @@
             
                 <div class= "row">
                     <div class="col">
-                        <h4>Country wise distribution of Tweets</h4>
+                        <h4>Country wise Distribution of Tweets</h4>
                         <div class="leftside">
                     {% autoescape off %}
                     {{ plot_div_country }}
                     {% endautoescape %}
                 </div>
                 </div>
+            
     <br>
     <br>
+
+    <div class="col">
+        
+        <h4 >Language wise Distribution of Tweets</h4>
+        <div class="rightside" >
+            
+                    {% autoescape off %}
+                    {{ plot_div_lang }}
+                    {% endautoescape %}
+                </div>
+                </div>
+            </div> 
+<br>
+<br>
     <div class="row">
         <div class="col">
         <div class="leftside">
@@ -59,22 +74,17 @@
                 <div style="margin-top: 50px" class="rightside">
                     <h4 >Covid and Vaccine Tweet Count</h4>
                     {% autoescape off %}
-                    {{ plot_div_lang }}
+                    {{ plt_div_overall }}
                     {% endautoescape %}
+
+             
                 </div>
                 </div>
-                <br>
-                <br>
-                <div class="col">
-                    <div class="leftside">
-                        <br>
-                        <br>
-                        <h4>Wordcloud of Vaccine Hesitancy in General Population tweets</h4>
-                        <link href="{% static 'images/'%}" rel="stylesheet" />
-                        <img src="{% static '/images/VaccineHesitancy.jpeg' %}" alt="Italian Trulli">
-                            </div>
-                            </div>
-                </div>    
+                </div>
+
+
+
+                 
             </td>
             <br>
             <br>
