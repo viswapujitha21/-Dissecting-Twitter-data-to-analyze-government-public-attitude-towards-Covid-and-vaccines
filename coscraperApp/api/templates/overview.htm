@@ -65,13 +65,13 @@
             <br>
             <h4>Wordcloud of Vaccine Hesitancy in General Population tweets</h4>
             <link href="{% static 'images/'%}" rel="stylesheet" />
-            <img src="{% static '/images/VaccineHesitancy.jpg' %}" alt="Italian Trulli">
+            <img src="{% static '/images/VaccineHesitancy.jpg' %}" alt="VaccineHesitancywordcloud"/>
                 </div>
             </div>
 
             <div class="col">
                 
-                <div style="margin-top: 50px; padding-right:200px" class="rightside">
+                <div style="margin-top: 50px" class="rightside">
                     <h4 >Covid and Vaccine Tweet Count</h4>
                     {% autoescape off %}
                     {{ plt_div_overall }}
@@ -90,8 +90,8 @@
             <br>
             <td>
                 
-                <div style="text-align:right">
-                    
+                <div style="text-align:center">
+                    <h4>Covid and Non-Covid Tweet distribution of POI</h4>
                     {% autoescape off %}
                     {{ plot_div_tweets}}
                     {% endautoescape %}
