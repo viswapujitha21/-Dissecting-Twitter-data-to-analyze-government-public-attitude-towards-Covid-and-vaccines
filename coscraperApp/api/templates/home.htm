@@ -16,7 +16,15 @@
 </head>
 <body style="background-color:aliceblue">
     <form action="{% url 'search' %}" method="get">
-    
+            {% csrf_token %}
+          <br>
+  
+                <!-- <input  type="search" placeholder="Search tweet" aria-label="Search" name="query_1" default="None" class="form-control" style="width: 500px;" >
+                <button class="btn-search" type="submit" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 2  22 20" >
+                        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                      </svg>
+                </button> -->
 
                 <h4 style="text-align:left;">Advance filters : </h4>   
     <table>          
@@ -74,8 +82,28 @@
             </td>
             <td>
                 
-                <input type="submit" value="Go"/>
-                <input type="hidden" name="query" value={{ request.GET.query}} /> 
+                 <input type="submit" value="Go"/>
+                 <!-- <button class="btn-search" type="submit" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 2  22 20" >
+                        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                      </svg>
+                </button> -->
+                <!-- <script>
+                    const queryString = window.location.search;
+                    console.log(queryString);
+                    const urlParams = new URLSearchParams(queryString);
+                    // const query = urlParams.get('query')
+                    // console.log(query);
+                    const query_1 = urlParams.get('query_1')
+                    console.log(query_1);
+
+                </script> -->
+                <input type="hidden" name="query" value={{ request.GET.query}}/> 
+                <!-- <button class="btn-search" type="submit" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 2  22 20" >
+                        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                      </svg>
+                </button> -->
             </td>
         </tr>
     
@@ -131,13 +159,14 @@
     </div>
     <div class="col-md-6">
         <div class="rightside" style="float: right; margin: 10px 15px 15px 0px;">
-            <h1 style="font-size:2vw">Sentiment Analysis Of Tweets</h1>
+            <h1 style="font-size:2vw">Sentiment Analysis of General Population Tweets</h1>
 
                 {% autoescape off %}
                 {{ plot_div }}
                 {% endautoescape %}
-
-                <h1 style="font-size:2vw">Sentiment Analysis Of Replies</h1>
+                <br>
+                <br>
+                <h1 style="font-size:2vw">Sentiment Analysis of replies to POI Tweets</h1>
 
                 {% autoescape off %}
                 {{ plot_div_replies }}

@@ -22,7 +22,6 @@ def search(request):
     #query = request.session['search']
     print(request)
     query = request.GET['query']
-    print(query)
     # poi = request.GET['poi_name']
     print(request.GET.get('poi_name'))
     poi_name= request.GET.get('poi_name')
@@ -212,7 +211,7 @@ def overview(request):
     df2 = pd.DataFrame(dict(Count=[853,174,133,83,53,49,45,45,44,32,28,28,23,21,20,19,18]))
     fig = px.bar(df1, x=df1.Topics, y=df2.Count, color=df1.Topics)
     fig.update_layout(
-    title = 'Trending topics',
+    #title = 'Trending topics',
     autosize=False,
     width=1700,
     height=400,
@@ -226,7 +225,8 @@ def overview(request):
     )
     fig.update_yaxes(automargin=True)
     plt_div = plot(fig, output_type='div')
-        #Country Graph
+
+    #Country Graph
     labels = ['India','Mexico','USA']
     values = [14236,11059,10533]
     ndata = 100
@@ -238,12 +238,13 @@ def overview(request):
             'textinfo':"percent",
             'textfont':{'size':12},
             'showlegend':True}],
-        'layout': {'title': 'Country wise distribution of Tweets',
+        'layout': {
+            #'title': 'Country wise distribution of Tweets',
             'showlegend':True,
             'height':600,
             'width':600,
             'autosize':False,
-            'margin':{'t':70,'l':95,'r':10,'b':20},
+            'margin':{'t':70,'l':95,'r':10,'b':30},
             'separators':'.,',
             }
     }
@@ -263,12 +264,13 @@ def overview(request):
             'textinfo':"percent",
             'textfont':{'size':12},
             'showlegend':True}],
-        'layout': {'title': 'Language wise distribution of Tweets',
+        'layout': {
+            #'title': 'Language wise distribution of Tweets',
             'showlegend':True,
             'height':600,
             'width':600,
             'autosize':False,
-            'margin':{'t':70,'l':95,'r':10,'b':20},
+            'margin':{'t':70,'l':95,'r':10,'b':30},
             'separators':'.,'}
     }
     plt_div3 = plot(fig3, output_type='div')
@@ -283,7 +285,7 @@ def overview(request):
         go.Bar(name='Non-Covid Tweet Count', x=poi, y=[321, 801, 699, 876, 940, 434, 872, 887, 926, 772, 824, 1040, 914, 1033, 1025])
     ])
     # Change the bar mode
-    fig4.update_layout(barmode='group',title = 'Covid and Non-Covid Tweet distribution of POI')
+    fig4.update_layout(barmode='group')
     plt_div4 = plot(fig4, output_type='div')
     #fig4.show()
     

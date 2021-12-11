@@ -17,7 +17,9 @@
 </head>
 <body style="background-color:aliceblue">
     <div class="center">
-    
+    <br>
+    <br>
+    <h4>Trending Topics</h4>
     <div style="text-align:center">
         {% autoescape off %}
         {{ plot_div }}
@@ -32,6 +34,7 @@
             
                 <div class= "row">
                     <div class="col">
+                        <h4>Country wise distribution of Tweets</h4>
                         <div class="leftside">
                     {% autoescape off %}
                     {{ plot_div_country }}
@@ -40,19 +43,35 @@
                 </div>
     <br>
     <br>
-    <div class="col">
+    <div class="row">
+        <h4>Language wise distribution of Tweets</h4>
         <div class="rightside">
+
                     {% autoescape off %}
                     {{ plot_div_lang }}
                     {% endautoescape %}
                 </div>
                 </div>
+                <br>
+                <br>
+                <div class="col">
+                    <div class="leftside">
+                        <br>
+                        <br>
+                        <h4>Wordcloud of Vaccine Hesitancy in General Population tweets</h4>
+                        <link href="{% static 'images/'%}" rel="stylesheet" />
+                        <img src="{% static '/images/VaccineHesitancy.jpeg' %}" alt="Italian Trulli">
+                            </div>
+                            </div>
                 </div>    
             </td>
             <br>
             <br>
             <td>
-                
+                <div class="center">
+                    <br>
+                    <br>
+                <h4>Covid and Non-Covid Tweet distribution of POI</h4>
                 <div style="text-align:right">
                     
                     {% autoescape off %}
