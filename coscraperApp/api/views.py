@@ -211,7 +211,7 @@ def overview(request):
     df2 = pd.DataFrame(dict(Count=[853,174,133,83,53,49,45,45,44,32,28,28,23,21,20,19,18]))
     fig = px.bar(df1, x=df1.Topics, y=df2.Count, color=df1.Topics)
     fig.update_layout(
-    #title = 'Trending topics',
+    title = '',
     autosize=False,
     width=1700,
     height=400,
@@ -285,7 +285,7 @@ def overview(request):
         go.Bar(name='Non-Covid Tweet Count', x=poi, y=[321, 801, 699, 876, 940, 434, 872, 887, 926, 772, 824, 1040, 914, 1033, 1025])
     ])
     # Change the bar mode
-    fig4.update_layout(barmode='group')
+    fig4.update_layout(barmode='group',title = '')
     plt_div4 = plot(fig4, output_type='div')
     #fig4.show()
     
