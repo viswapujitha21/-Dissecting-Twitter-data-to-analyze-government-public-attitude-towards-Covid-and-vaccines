@@ -113,8 +113,10 @@
             
     </form>
     <br>
-
+    <h6 style="padding-left: 10px;">Displaying tweets for {{request.GET.query}}</h6>
+    <hr style="border-top:1px dotted #ccc;"/>
 <div class="row no-gutters">
+    
     <div class="col-md-6"style="padding-left: 10px;">
        <div class="leftside" style="word-wrap: break-word; width:800px;text-align: justify;text-justify: inter-word;">
         {% for i in time_series_json_string %}

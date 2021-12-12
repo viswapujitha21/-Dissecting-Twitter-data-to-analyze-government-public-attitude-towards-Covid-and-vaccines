@@ -214,8 +214,8 @@ def overview(request):
     fig.update_layout(
     title = '',
     autosize=False,
-    width=1560,
-    height=400,
+    width=1700,
+    height=600,
     yaxis=dict(
          title_text="Tweet count",
     #     ticktext=["Very long label", "long label", "3", "label"],
@@ -241,7 +241,7 @@ def overview(request):
         'layout': {'title': '',
             'showlegend':True,
             'height':600,
-            'width':600,
+            'width':700,
             'autosize':False,
             'margin':{'t':70,'l':95,'r':10,'b':20},
             'separators':'.,',
@@ -266,7 +266,7 @@ def overview(request):
         'layout': {'title': '',
             'showlegend':True,
             'height':600,
-            'width':600,
+            'width':700,
             'autosize':False,
             'margin':{'t':70,'l':95,'r':10,'b':20},
             'separators':'.,'}
@@ -303,7 +303,7 @@ def overview(request):
         'layout': {'title': '',
             'showlegend':True,
             'height':600,
-            'width':600,
+            'width':700,
             'autosize':False,
             'margin':{'t':70,'l':95,'r':10,'b':20},
             'separators':'.,'}
